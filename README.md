@@ -15,11 +15,6 @@ docker --version
 ```
   > Docker version 1.9.0-dev, build 02ae137, 
 
-Put the following in your `/etc/default/docker` file:
-```
-DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375 --kv-store=consul:localhost:8500 --label=com.docker.network.driver.overlay.bind_interface=eth0 --label=com.docker.network.driver.overlay.neighbor_ip=<your local 10.0.10.xx IP>"
-```
-    
 ## Install Consul 
 ```
 curl -OL https://dl.bintray.com/mitchellh/consul/0.5.2_linux_amd64.zip
@@ -36,3 +31,8 @@ consul agent -server -bootstrap -data-dir /tmp/consul -bind=<host-1-ip-address>
 consul agent -data-dir /tmp/consul -bind=$(ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}') -node <mynodename>
 consul join <host-1-ip-address>
 ```
+Put the following in your `/etc/default/docker` file:
+```
+DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375 --kv-store=consul:localhost:8500 --label=com.docker.network.driver.overlay.bind_interface=eth0 --label=com.docker.network.driver.overlay.neighbor_ip=<your local 10.0.10.xx IP>"
+```
+And restart the docker daemon `sudo service docker restart`.
