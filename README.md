@@ -1,7 +1,8 @@
 # dockerTTT_net19_presentation
 Group session exercise to present about the new networking features in Docker 1.9
 
-
+## Update kernel to 3.16
+    sudo apt-get install linux-image-generic-lts-utopic
 
 ## Install docker 1.9 procedure
     curl -sSL https://experimental.docker.com/ | sh
