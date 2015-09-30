@@ -36,3 +36,9 @@ Put the following in your `/etc/default/docker` file:
 DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375 --kv-store=consul:localhost:8500 --label=com.docker.network.driver.overlay.bind_interface=eth0 --label=com.docker.network.driver.overlay.neighbor_ip=<your local 10.0.10.xx IP>"
 ```
 And restart the docker daemon `sudo service docker restart`.
+
+## Overlay network
+We're now able to create an overlay network backed by Consul's kv store
+`docker network create  -d overlay my-net`
+`docker network ls`
+> 675fde2ed35b        my-net              overlay
